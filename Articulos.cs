@@ -28,6 +28,11 @@ namespace TPV
         public String getArticulo(){return articulo;}
         public double getPrecio() { return precio;}
         public int getCantidad(){return cantidad;}
+        public void cantidadMas()
+        {
+            cantidad++;
+        }
+        public void setCantidad(int cant) { cantidad = cant; }
         public double getImpuestos() { return impuestos; }
         public Image getPng()
         {
@@ -50,5 +55,6 @@ namespace TPV
 
             }
         }
+        
     }
 }

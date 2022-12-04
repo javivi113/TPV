@@ -29,23 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanelTipos = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.usuario = new System.Windows.Forms.Label();
             this.user = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.listadoImporteCentral = new System.Windows.Forms.ListBox();
-            this.listadoImpuestosCentral = new System.Windows.Forms.ListBox();
-            this.listadoCantidadCentral = new System.Windows.Forms.ListBox();
-            this.listadoPrecioCentral = new System.Windows.Forms.ListBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.listadoArticulosCentral = new System.Windows.Forms.ListBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.fbProductos = new System.Windows.Forms.FlowLayoutPanel();
             this.button33 = new System.Windows.Forms.Button();
@@ -89,13 +79,19 @@
             this.btnManageUsers = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.txtColArticulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doubleColPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.intColCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.intColImpuestos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doubleColImporte = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -114,11 +110,11 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer2.Panel2.Controls.Add(this.flowLayoutPanelTipos);
             this.splitContainer2.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer2.Panel2.Controls.Add(this.usuario);
             this.splitContainer2.Panel2.Controls.Add(this.user);
-            this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel1);
             this.splitContainer2.Panel2.Controls.Add(this.textBox1);
             this.splitContainer2.Panel2.Controls.Add(this.fbProductos);
             this.splitContainer2.Panel2.Controls.Add(this.button33);
@@ -204,129 +200,6 @@
             this.user.Name = "user";
             this.user.Size = new System.Drawing.Size(0, 30);
             this.user.TabIndex = 52;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.tableLayoutPanel1.Controls.Add(this.listadoImporteCentral, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listadoImpuestosCentral, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listadoCantidadCentral, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listadoPrecioCentral, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label8, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.listadoArticulosCentral, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(33, 94);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.665106F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.33489F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1290, 427);
-            this.tableLayoutPanel1.TabIndex = 51;
-            // 
-            // listadoImporteCentral
-            // 
-            this.listadoImporteCentral.FormattingEnabled = true;
-            this.listadoImporteCentral.ItemHeight = 15;
-            this.listadoImporteCentral.Location = new System.Drawing.Point(1003, 40);
-            this.listadoImporteCentral.Name = "listadoImporteCentral";
-            this.listadoImporteCentral.Size = new System.Drawing.Size(244, 379);
-            this.listadoImporteCentral.TabIndex = 9;
-            // 
-            // listadoImpuestosCentral
-            // 
-            this.listadoImpuestosCentral.FormattingEnabled = true;
-            this.listadoImpuestosCentral.ItemHeight = 15;
-            this.listadoImpuestosCentral.Location = new System.Drawing.Point(753, 40);
-            this.listadoImpuestosCentral.Name = "listadoImpuestosCentral";
-            this.listadoImpuestosCentral.Size = new System.Drawing.Size(244, 379);
-            this.listadoImpuestosCentral.TabIndex = 8;
-            // 
-            // listadoCantidadCentral
-            // 
-            this.listadoCantidadCentral.FormattingEnabled = true;
-            this.listadoCantidadCentral.ItemHeight = 15;
-            this.listadoCantidadCentral.Location = new System.Drawing.Point(503, 40);
-            this.listadoCantidadCentral.Name = "listadoCantidadCentral";
-            this.listadoCantidadCentral.Size = new System.Drawing.Size(244, 379);
-            this.listadoCantidadCentral.TabIndex = 7;
-            // 
-            // listadoPrecioCentral
-            // 
-            this.listadoPrecioCentral.FormattingEnabled = true;
-            this.listadoPrecioCentral.ItemHeight = 15;
-            this.listadoPrecioCentral.Location = new System.Drawing.Point(253, 40);
-            this.listadoPrecioCentral.Name = "listadoPrecioCentral";
-            this.listadoPrecioCentral.Size = new System.Drawing.Size(244, 379);
-            this.listadoPrecioCentral.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(253, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 30);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Precio";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(753, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(109, 30);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Impuestos";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(503, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(96, 30);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Cantidad";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(1003, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(86, 30);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Importe";
-            // 
-            // listadoArticulosCentral
-            // 
-            this.listadoArticulosCentral.FormattingEnabled = true;
-            this.listadoArticulosCentral.ItemHeight = 15;
-            this.listadoArticulosCentral.Location = new System.Drawing.Point(3, 40);
-            this.listadoArticulosCentral.Name = "listadoArticulosCentral";
-            this.listadoArticulosCentral.Size = new System.Drawing.Size(244, 379);
-            this.listadoArticulosCentral.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 30);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Artículos";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBox1
             // 
@@ -517,7 +390,7 @@
             // 
             // button28
             // 
-            this.button28.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button28.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button28.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button28.Location = new System.Drawing.Point(1653, 287);
             this.button28.Name = "button28";
@@ -528,7 +401,7 @@
             // 
             // button27
             // 
-            this.button27.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button27.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button27.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button27.Location = new System.Drawing.Point(1653, 159);
             this.button27.Name = "button27";
@@ -540,7 +413,7 @@
             // button26
             // 
             this.button26.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button26.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button26.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button26.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button26.Location = new System.Drawing.Point(1653, 95);
             this.button26.Name = "button26";
@@ -551,7 +424,7 @@
             // 
             // button25
             // 
-            this.button25.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button25.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button25.Location = new System.Drawing.Point(1572, 95);
             this.button25.Name = "button25";
@@ -562,7 +435,7 @@
             // 
             // button24
             // 
-            this.button24.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button24.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button24.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button24.Location = new System.Drawing.Point(1410, 94);
             this.button24.Name = "button24";
@@ -573,7 +446,7 @@
             // 
             // button23
             // 
-            this.button23.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button23.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button23.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button23.Location = new System.Drawing.Point(1572, 355);
             this.button23.Name = "button23";
@@ -584,7 +457,7 @@
             // 
             // button22
             // 
-            this.button22.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button22.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button22.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button22.Location = new System.Drawing.Point(1410, 355);
             this.button22.Name = "button22";
@@ -595,7 +468,7 @@
             // 
             // button21
             // 
-            this.button21.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button21.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button21.Location = new System.Drawing.Point(1572, 287);
             this.button21.Name = "button21";
@@ -606,7 +479,7 @@
             // 
             // button20
             // 
-            this.button20.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button20.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button20.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button20.Location = new System.Drawing.Point(1491, 287);
             this.button20.Name = "button20";
@@ -617,7 +490,7 @@
             // 
             // button19
             // 
-            this.button19.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button19.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button19.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button19.Location = new System.Drawing.Point(1572, 223);
             this.button19.Name = "button19";
@@ -628,7 +501,7 @@
             // 
             // button18
             // 
-            this.button18.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button18.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button18.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button18.Location = new System.Drawing.Point(1491, 223);
             this.button18.Name = "button18";
@@ -639,7 +512,7 @@
             // 
             // button17
             // 
-            this.button17.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button17.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button17.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button17.Location = new System.Drawing.Point(1572, 159);
             this.button17.Name = "button17";
@@ -650,7 +523,7 @@
             // 
             // button16
             // 
-            this.button16.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button16.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button16.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button16.Location = new System.Drawing.Point(1491, 159);
             this.button16.Name = "button16";
@@ -661,7 +534,7 @@
             // 
             // button15
             // 
-            this.button15.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button15.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button15.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button15.Location = new System.Drawing.Point(1410, 287);
             this.button15.Name = "button15";
@@ -672,7 +545,7 @@
             // 
             // button14
             // 
-            this.button14.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button14.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button14.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button14.Location = new System.Drawing.Point(1410, 223);
             this.button14.Name = "button14";
@@ -683,7 +556,7 @@
             // 
             // button13
             // 
-            this.button13.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button13.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button13.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button13.Location = new System.Drawing.Point(1410, 159);
             this.button13.Name = "button13";
@@ -755,6 +628,55 @@
             this.button1.Text = "<";
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.txtColArticulo,
+            this.doubleColPrecio,
+            this.intColCantidad,
+            this.intColImpuestos,
+            this.doubleColImporte});
+            this.dataGridView1.Location = new System.Drawing.Point(33, 95);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(1290, 448);
+            this.dataGridView1.TabIndex = 55;
+            // 
+            // txtColArticulo
+            // 
+            this.txtColArticulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.txtColArticulo.DefaultCellStyle = dataGridViewCellStyle1;
+            this.txtColArticulo.HeaderText = "Articulo";
+            this.txtColArticulo.Name = "txtColArticulo";
+            // 
+            // doubleColPrecio
+            // 
+            this.doubleColPrecio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.doubleColPrecio.HeaderText = "Precio";
+            this.doubleColPrecio.Name = "doubleColPrecio";
+            // 
+            // intColCantidad
+            // 
+            this.intColCantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.intColCantidad.HeaderText = "Cantidad";
+            this.intColCantidad.Name = "intColCantidad";
+            // 
+            // intColImpuestos
+            // 
+            this.intColImpuestos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.intColImpuestos.HeaderText = "Impuestos";
+            this.intColImpuestos.Name = "intColImpuestos";
+            // 
+            // doubleColImporte
+            // 
+            this.doubleColImporte.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.doubleColImporte.HeaderText = "Importe";
+            this.doubleColImporte.Name = "doubleColImporte";
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1904, 1041);
@@ -769,8 +691,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -821,21 +742,16 @@
         private Label label1;
         private TextBox TotalCalTotal;
         private TextBox SubtotalCalTotal;
-        private TableLayoutPanel tableLayoutPanel1;
-        private Label label5;
-        private Label label4;
-        private ListBox listadoImporteCentral;
-        private ListBox listadoImpuestosCentral;
-        private ListBox listadoCantidadCentral;
-        private ListBox listadoPrecioCentral;
-        private Label label6;
-        private Label label7;
-        private Label label8;
-        private ListBox listadoArticulosCentral;
         private Label user;
         private PictureBox pictureBox1;
         private Label usuario;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private FlowLayoutPanel flowLayoutPanelTipos;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn txtColArticulo;
+        private DataGridViewTextBoxColumn doubleColPrecio;
+        private DataGridViewTextBoxColumn intColCantidad;
+        private DataGridViewTextBoxColumn intColImpuestos;
+        private DataGridViewTextBoxColumn doubleColImporte;
     }
 }
