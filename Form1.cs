@@ -5,9 +5,11 @@ namespace TPV
 {
     public partial class Form1 : Form
     {
+        Articulos articuloCuentaSelec;
         Boolean admin = false;
         List<String> lTipoArticulos;
         public static bool userOpenWindow=false;
+        Cuenta cuenta = new Cuenta();
         public Form1()
         {
             InitializeComponent();
@@ -147,6 +149,8 @@ namespace TPV
                     125, 125);
                 btn.Size = size;
                 btn.BackgroundImageLayout = ImageLayout.Stretch;
+                articuloCuentaSelec = a;
+                btn.Click += new EventHandler(addCuentaEvent);
                 fbProductos.Controls.Add(btn);
             });
 
@@ -161,6 +165,33 @@ namespace TPV
                 form.Show();
             }
             
+        }
+
+        private void nuevaCuenta(object sender, EventArgs e)
+        {
+            cuenta.nuevaCuenta();
+        }
+
+        private void vaciarCuenta(object sender, EventArgs e)
+        {
+            cuenta.nuevaCuenta();
+        }
+
+        void addCuentaEvent(Object sender, EventArgs e)
+        {
+            añadirACuenta(articuloCuentaSelec);
+        }
+
+        private void añadirACuenta(Articulos a)
+        {
+            cuenta.addArticulo(a);
+            dgvCuenta.Rows.Clear();
+            cuenta.getCuenta().ForEach((art) =>
+            {
+                double importe = ((art.getCantidad() * art.getPrecio()) + ((art.getCantidad() * art.getPrecio()) * (art.getImpuestos()/100)));
+                dgvCuenta.Rows.Add(art.getArticulo(), art.getPrecio(), art.getCantidad(),art.getImpuestos(),importe);
+            });
+
         }
     }
 }

@@ -28,10 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.dgvCuenta = new System.Windows.Forms.DataGridView();
+            this.txtColArticulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doubleColPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.intColCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.intColImpuestos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doubleColImporte = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanelTipos = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.usuario = new System.Windows.Forms.Label();
@@ -79,19 +85,13 @@
             this.btnManageUsers = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.txtColArticulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.doubleColPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.intColCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.intColImpuestos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.doubleColImporte = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCuenta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -110,7 +110,7 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.dataGridView1);
+            this.splitContainer2.Panel2.Controls.Add(this.dgvCuenta);
             this.splitContainer2.Panel2.Controls.Add(this.flowLayoutPanelTipos);
             this.splitContainer2.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer2.Panel2.Controls.Add(this.usuario);
@@ -161,6 +161,55 @@
             this.splitContainer2.Size = new System.Drawing.Size(1904, 1041);
             this.splitContainer2.SplitterDistance = 157;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // dgvCuenta
+            // 
+            this.dgvCuenta.AllowUserToAddRows = false;
+            this.dgvCuenta.AllowUserToDeleteRows = false;
+            this.dgvCuenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCuenta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.txtColArticulo,
+            this.doubleColPrecio,
+            this.intColCantidad,
+            this.intColImpuestos,
+            this.doubleColImporte});
+            this.dgvCuenta.Location = new System.Drawing.Point(33, 95);
+            this.dgvCuenta.Name = "dgvCuenta";
+            this.dgvCuenta.RowTemplate.Height = 25;
+            this.dgvCuenta.Size = new System.Drawing.Size(1290, 448);
+            this.dgvCuenta.TabIndex = 55;
+            // 
+            // txtColArticulo
+            // 
+            this.txtColArticulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.txtColArticulo.DefaultCellStyle = dataGridViewCellStyle1;
+            this.txtColArticulo.HeaderText = "Articulo";
+            this.txtColArticulo.Name = "txtColArticulo";
+            // 
+            // doubleColPrecio
+            // 
+            this.doubleColPrecio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.doubleColPrecio.HeaderText = "Precio";
+            this.doubleColPrecio.Name = "doubleColPrecio";
+            // 
+            // intColCantidad
+            // 
+            this.intColCantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.intColCantidad.HeaderText = "Cantidad";
+            this.intColCantidad.Name = "intColCantidad";
+            // 
+            // intColImpuestos
+            // 
+            this.intColImpuestos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.intColImpuestos.HeaderText = "Impuestos";
+            this.intColImpuestos.Name = "intColImpuestos";
+            // 
+            // doubleColImporte
+            // 
+            this.doubleColImporte.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.doubleColImporte.HeaderText = "Importe";
+            this.doubleColImporte.Name = "doubleColImporte";
             // 
             // flowLayoutPanelTipos
             // 
@@ -595,6 +644,7 @@
             this.button5.Size = new System.Drawing.Size(94, 63);
             this.button5.TabIndex = 6;
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.vaciarCuenta);
             // 
             // button4
             // 
@@ -605,6 +655,7 @@
             this.button4.Size = new System.Drawing.Size(94, 63);
             this.button4.TabIndex = 5;
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.nuevaCuenta);
             // 
             // btnManageUsers
             // 
@@ -628,55 +679,6 @@
             this.button1.Text = "<";
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.txtColArticulo,
-            this.doubleColPrecio,
-            this.intColCantidad,
-            this.intColImpuestos,
-            this.doubleColImporte});
-            this.dataGridView1.Location = new System.Drawing.Point(33, 95);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(1290, 448);
-            this.dataGridView1.TabIndex = 55;
-            // 
-            // txtColArticulo
-            // 
-            this.txtColArticulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.txtColArticulo.DefaultCellStyle = dataGridViewCellStyle1;
-            this.txtColArticulo.HeaderText = "Articulo";
-            this.txtColArticulo.Name = "txtColArticulo";
-            // 
-            // doubleColPrecio
-            // 
-            this.doubleColPrecio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.doubleColPrecio.HeaderText = "Precio";
-            this.doubleColPrecio.Name = "doubleColPrecio";
-            // 
-            // intColCantidad
-            // 
-            this.intColCantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.intColCantidad.HeaderText = "Cantidad";
-            this.intColCantidad.Name = "intColCantidad";
-            // 
-            // intColImpuestos
-            // 
-            this.intColImpuestos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.intColImpuestos.HeaderText = "Impuestos";
-            this.intColImpuestos.Name = "intColImpuestos";
-            // 
-            // doubleColImporte
-            // 
-            this.doubleColImporte.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.doubleColImporte.HeaderText = "Importe";
-            this.doubleColImporte.Name = "doubleColImporte";
-            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1904, 1041);
@@ -690,8 +692,8 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCuenta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -747,7 +749,7 @@
         private Label usuario;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private FlowLayoutPanel flowLayoutPanelTipos;
-        private DataGridView dataGridView1;
+        private DataGridView dgvCuenta;
         private DataGridViewTextBoxColumn txtColArticulo;
         private DataGridViewTextBoxColumn doubleColPrecio;
         private DataGridViewTextBoxColumn intColCantidad;

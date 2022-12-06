@@ -12,7 +12,7 @@ namespace TPV
         Articulos articulo;
         public static double ImporteTotal = 0;
         String TicketCuenta = "";
-        public Cuenta(Articulos art)
+        public void addArticulo(Articulos art)
         {
             art.setCantidad(1);
             bool exists = false;
@@ -29,7 +29,11 @@ namespace TPV
                 cuenta.Add(art);
             }
         }
-        public void vaciarCuenta()
+        public List<Articulos> getCuenta() 
+        {
+            return cuenta;
+        }
+        public void nuevaCuenta()
         {
             cuenta = new List<Articulos>();
         }
