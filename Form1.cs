@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic;
 using MySqlConnector;
 using TPV.Properties;
 
@@ -192,6 +193,121 @@ namespace TPV
                 dgvCuenta.Rows.Add(art.getArticulo(), art.getPrecio(), art.getCantidad(),art.getImpuestos(),importe);
             });
 
+        }
+
+        private void addNewArticulo(object sender, EventArgs e)
+        {
+            //NOMBRE DEL ARTICULO
+            String nombreArticulo;
+            do
+            {
+                nombreArticulo = Interaction.InputBox("Introduce el nombre del articulo: ", "Crear nuevo Articulo");
+            } while (nombreArticulo.Length>0);
+            //PRECIO DEL ARTICULO
+            double precio;
+            bool seguir = true;
+            while(seguir)
+            {
+                try
+                {
+                    precio = Double.Parse(Interaction.InputBox("Introduce el precio del articulo: ", "Crear nuevo Articulo"));
+                    seguir = false;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("El precio del articulo debe ser numerico", "Crear nuevo usuario", MessageBoxButtons.OK);
+                }
+                
+            }
+            //CANTIDAD DEL ARTICULO
+            double cantidad;
+            seguir = true;
+            while (seguir)
+            {
+                try
+                {
+                    cantidad = Convert.ToInt32(Interaction.InputBox("Introduce el stock del articulo: ", "Crear nuevo Articulo"));
+                    seguir = false;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("El stock del articulo debe ser numerico", "Crear nuevo usuario", MessageBoxButtons.OK);
+                }
+
+            }
+            //IMPUESTOS DEL ARTICULO
+            double impuestos;
+            seguir = true;
+            while (seguir)
+            {
+                try
+                {
+                    impuestos = Convert.ToInt32(Interaction.InputBox("Introduce el impuesto del articulo: ", "Crear nuevo Articulo"));
+                    seguir = false;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("El impuesto del articulo debe ser numerico", "Crear nuevo usuario", MessageBoxButtons.OK);
+                }
+
+            }
+            //TIPO DEL ARTICULO
+            double tipo;
+            seguir = true;
+            while (seguir)
+            {
+                try
+                {
+                    impuestos = Interaction.InputBox("Introduce el tipo del articulo:-Cafes-Cerveza-Licores-Picoteo-Vino-Refrescos", "Crear nuevo Articulo");
+
+                    seguir = false;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("El impuesto del articulo debe ser numerico", "Crear nuevo usuario", MessageBoxButtons.OK);
+                }
+
+            }
+            //do
+            //{
+            //    password = Interaction.InputBox("Introduce la contraseña para el usuario: ", "Crear nuevo usuario");
+            //} while (password.Length <= 0);
+            string message = "Es administrador?";
+            string caption = "Crear nuevo usuario";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
+            result = MessageBox.Show(message, caption, buttons);
+            bool admin = false;
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                admin = true;
+
+            }
+            else
+            {
+                admin = false;
+            }
+            if (username != null || password != null)
+            {
+                using var connection = new MySqlConnection(builder.ConnectionString);
+                connection.Open();
+                using var command = connection.CreateCommand();
+                command.CommandText = $"INSERT INTO usuarios VALUES (?user,?pass,?admin)";
+                command.Parameters.Add("?user", MySqlDbType.VarString).Value = username.Trim();
+                command.Parameters.Add("?pass", MySqlDbType.VarString).Value = password;
+                command.Parameters.Add("?admin", MySqlDbType.Bool).Value = admin;
+                command.ExecuteNonQuery();
+                connectToDB();
+
+            }
+            else
+            {
+                string msg = "Ha ocurrido un error. No se a podido crear el nuevo usuario.";
+                string cap = "Crear nuevo usuario";
+                MessageBoxButtons btn = MessageBoxButtons.CancelTryContinue;
+                DialogResult res;
+                result = MessageBox.Show(msg, cap, btn);
+            }
         }
     }
 }

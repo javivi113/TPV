@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -44,8 +44,6 @@
             this.user = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.fbProductos = new System.Windows.Forms.FlowLayoutPanel();
-            this.button33 = new System.Windows.Forms.Button();
-            this.button32 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.impuestoCalcTotal = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -85,6 +83,8 @@
             this.btnManageUsers = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnAñadirnuevoProducto = new System.Windows.Forms.Button();
+            this.btnEditProductos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -110,6 +110,8 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.btnEditProductos);
+            this.splitContainer2.Panel2.Controls.Add(this.btnAñadirnuevoProducto);
             this.splitContainer2.Panel2.Controls.Add(this.dgvCuenta);
             this.splitContainer2.Panel2.Controls.Add(this.flowLayoutPanelTipos);
             this.splitContainer2.Panel2.Controls.Add(this.pictureBox1);
@@ -117,8 +119,6 @@
             this.splitContainer2.Panel2.Controls.Add(this.user);
             this.splitContainer2.Panel2.Controls.Add(this.textBox1);
             this.splitContainer2.Panel2.Controls.Add(this.fbProductos);
-            this.splitContainer2.Panel2.Controls.Add(this.button33);
-            this.splitContainer2.Panel2.Controls.Add(this.button32);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Controls.Add(this.impuestoCalcTotal);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
@@ -182,8 +182,8 @@
             // txtColArticulo
             // 
             this.txtColArticulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.txtColArticulo.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.txtColArticulo.DefaultCellStyle = dataGridViewCellStyle2;
             this.txtColArticulo.HeaderText = "Articulo";
             this.txtColArticulo.Name = "txtColArticulo";
             // 
@@ -264,27 +264,6 @@
             this.fbProductos.Name = "fbProductos";
             this.fbProductos.Size = new System.Drawing.Size(1150, 364);
             this.fbProductos.TabIndex = 49;
-            // 
-            // button33
-            // 
-            this.button33.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button33.BackgroundImage")));
-            this.button33.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button33.Location = new System.Drawing.Point(507, 730);
-            this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(65, 57);
-            this.button33.TabIndex = 48;
-            this.button33.UseVisualStyleBackColor = true;
-            // 
-            // button32
-            // 
-            this.button32.BackColor = System.Drawing.Color.Transparent;
-            this.button32.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button32.BackgroundImage")));
-            this.button32.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button32.Location = new System.Drawing.Point(507, 667);
-            this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(65, 57);
-            this.button32.TabIndex = 47;
-            this.button32.UseVisualStyleBackColor = false;
             // 
             // label3
             // 
@@ -679,6 +658,25 @@
             this.button1.Text = "<";
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // btnAñadirnuevoProducto
+            // 
+            this.btnAñadirnuevoProducto.Location = new System.Drawing.Point(497, 667);
+            this.btnAñadirnuevoProducto.Name = "btnAñadirnuevoProducto";
+            this.btnAñadirnuevoProducto.Size = new System.Drawing.Size(75, 71);
+            this.btnAñadirnuevoProducto.TabIndex = 56;
+            this.btnAñadirnuevoProducto.Text = "Añadir nuevo";
+            this.btnAñadirnuevoProducto.UseVisualStyleBackColor = true;
+            this.btnAñadirnuevoProducto.Click += new System.EventHandler(this.addNewArticulo);
+            // 
+            // btnEditProductos
+            // 
+            this.btnEditProductos.Location = new System.Drawing.Point(497, 744);
+            this.btnEditProductos.Name = "btnEditProductos";
+            this.btnEditProductos.Size = new System.Drawing.Size(75, 71);
+            this.btnEditProductos.TabIndex = 57;
+            this.btnEditProductos.Text = "Editar Productos";
+            this.btnEditProductos.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1904, 1041);
@@ -736,8 +734,6 @@
         private Button btnManageUsers;
         private TextBox textBox1;
         private FlowLayoutPanel fbProductos;
-        private Button button33;
-        private Button button32;
         private Label label3;
         private TextBox impuestoCalcTotal;
         private Label label2;
@@ -755,5 +751,7 @@
         private DataGridViewTextBoxColumn intColCantidad;
         private DataGridViewTextBoxColumn intColImpuestos;
         private DataGridViewTextBoxColumn doubleColImporte;
+        private Button btnEditProductos;
+        private Button btnAñadirnuevoProducto;
     }
 }
