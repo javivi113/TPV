@@ -1,4 +1,5 @@
 using MySqlConnector;
+using System.Drawing.Printing;
 using TPV.Properties;
 
 namespace TPV
@@ -192,6 +193,32 @@ namespace TPV
                 dgvCuenta.Rows.Add(art.getArticulo(), art.getPrecio(), art.getCantidad(),art.getImpuestos(),importe);
             });
 
+        }
+
+        private void sacarTicket(object sender, EventArgs e)
+        {
+            string directory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string file = "ticket.pdf";
+
+            PrintDocument pDoc = new PrintDocument()
+            {
+                PrinterSettings = new PrinterSettings()
+                {
+                    PrinterName = "Microsoft Print to PDF",
+                    PrintToFile = true,
+                    PrintFileName = System.IO.Path.Combine(directory, file),
+                }
+            };
+
+            pDoc.PrintPage += new PrintPageEventHandler(Print_Page);
+            pDoc.Print();
+        }
+        public void Print_Page(object sender, PrintPageEventArgs e)
+        {
+            Font fnt = new Font("Courier New", 12);
+            String ticketCuenta = cuenta.devolverTicket();
+            e.Graphics.DrawString
+              (ticketCuenta, fnt, System.Drawing.Brushes.Black, 0, 0);
         }
     }
 }
