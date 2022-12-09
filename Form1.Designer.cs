@@ -328,6 +328,7 @@
             this.button31.Size = new System.Drawing.Size(124, 76);
             this.button31.TabIndex = 39;
             this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.sacarTicket);
             // 
             // button30
             // 

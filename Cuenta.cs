@@ -42,8 +42,9 @@ namespace TPV
             String ticket = "";
             cuenta.ForEach(arti =>
             {
-                ticket += articuloCuenta(arti);
+                ticket += articuloCuenta(arti)+"\n";
             });
+            ticket+= "\n"+"Total a pagar: "+ImporteTotal;
             return ticket;
         }
 
