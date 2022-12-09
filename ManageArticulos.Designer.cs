@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
-            this.filtrobtn = new System.Windows.Forms.Button();
-            this.addbtn = new System.Windows.Forms.Button();
-            this.deletebtn = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.intId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtArticulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dblprecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.intCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dblImpuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtTipo = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.txtTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.filtrobtn = new System.Windows.Forms.Button();
+            this.addbtn = new System.Windows.Forms.Button();
+            this.deletebtn = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             this.SuspendLayout();
@@ -46,6 +47,7 @@
             // 
             this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvArticulos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.intId,
             this.txtArticulo,
             this.dblprecio,
             this.intCantidad,
@@ -56,6 +58,49 @@
             this.dgvArticulos.RowTemplate.Height = 25;
             this.dgvArticulos.Size = new System.Drawing.Size(1158, 499);
             this.dgvArticulos.TabIndex = 0;
+            this.dgvArticulos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.manageArticulos);
+            // 
+            // intId
+            // 
+            this.intId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.intId.HeaderText = "Id";
+            this.intId.Name = "intId";
+            this.intId.ReadOnly = true;
+            this.intId.Width = 42;
+            // 
+            // txtArticulo
+            // 
+            this.txtArticulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.txtArticulo.HeaderText = "Articulo";
+            this.txtArticulo.Name = "txtArticulo";
+            this.txtArticulo.ReadOnly = true;
+            // 
+            // dblprecio
+            // 
+            this.dblprecio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dblprecio.HeaderText = "Precio";
+            this.dblprecio.Name = "dblprecio";
+            // 
+            // intCantidad
+            // 
+            this.intCantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.intCantidad.HeaderText = "Cantidad";
+            this.intCantidad.Name = "intCantidad";
+            // 
+            // dblImpuesto
+            // 
+            this.dblImpuesto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dblImpuesto.HeaderText = "Impuesto";
+            this.dblImpuesto.Name = "dblImpuesto";
+            // 
+            // txtTipo
+            // 
+            this.txtTipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.txtTipo.HeaderText = "Tipo";
+            this.txtTipo.Name = "txtTipo";
+            this.txtTipo.ReadOnly = true;
+            this.txtTipo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.txtTipo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // filtrobtn
             // 
@@ -95,44 +140,6 @@
             this.textBox1.Size = new System.Drawing.Size(159, 33);
             this.textBox1.TabIndex = 4;
             // 
-            // txtArticulo
-            // 
-            this.txtArticulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.txtArticulo.HeaderText = "Articulo";
-            this.txtArticulo.Name = "txtArticulo";
-            this.txtArticulo.ReadOnly = true;
-            // 
-            // dblprecio
-            // 
-            this.dblprecio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dblprecio.HeaderText = "Precio";
-            this.dblprecio.Name = "dblprecio";
-            // 
-            // intCantidad
-            // 
-            this.intCantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.intCantidad.HeaderText = "Cantidad";
-            this.intCantidad.Name = "intCantidad";
-            // 
-            // dblImpuesto
-            // 
-            this.dblImpuesto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dblImpuesto.HeaderText = "Impuesto";
-            this.dblImpuesto.Name = "dblImpuesto";
-            // 
-            // txtTipo
-            // 
-            this.txtTipo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.txtTipo.HeaderText = "Tipo";
-            this.txtTipo.Items.AddRange(new object[] {
-            "Cerverza",
-            "Picoteo",
-            "Vino",
-            "Cafes",
-            "Licores",
-            "Varios"});
-            this.txtTipo.Name = "txtTipo";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -169,11 +176,12 @@
         private Button addbtn;
         private Button deletebtn;
         private TextBox textBox1;
+        private Label label1;
+        private DataGridViewTextBoxColumn intId;
         private DataGridViewTextBoxColumn txtArticulo;
         private DataGridViewTextBoxColumn dblprecio;
         private DataGridViewTextBoxColumn intCantidad;
         private DataGridViewTextBoxColumn dblImpuesto;
-        private DataGridViewComboBoxColumn txtTipo;
-        private Label label1;
+        private DataGridViewTextBoxColumn txtTipo;
     }
 }

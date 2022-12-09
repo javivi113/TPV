@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,13 +37,20 @@ namespace TPV
             MySqlDataAdapter sqlDA = new MySqlDataAdapter("Select * from articulos", connection);
             DataTable dtbl = new DataTable();
             sqlDA.Fill(dtbl);
+            intId.DataPropertyName= "id";
             txtArticulo.DataPropertyName = "articulo";
             dblprecio.DataPropertyName = "precio";
             intCantidad.DataPropertyName = "cantidad";
-            dblImpuesto.DataPropertyName = "impuesto";
+            dblImpuesto.DataPropertyName = "impuestos";
             txtTipo.DataPropertyName = "tipo";
-           
-            dgvArticulos.DataSource = dtbl;
+            try
+            {
+                dgvArticulos.DataSource = dtbl;
+            }catch(Exception ex)
+            {
+
+            }
+            
         }
         public void filtrar(String filtro)
         {
@@ -50,8 +58,10 @@ namespace TPV
             {
                 using var connection = new MySqlConnection(builder.ConnectionString);
                 connection.Open();
-
-                MySqlDataAdapter sqlDA = new MySqlDataAdapter("Select * from articulos where articulo=" + filtro, connection);
+                string sqlQuery = $"Select * from articulos where articulo= @art";
+                MySqlCommand command = new MySqlCommand(sqlQuery, connection);
+                command.Parameters.Add(new MySqlParameter("@art", filtro));
+                MySqlDataAdapter sqlDA = new MySqlDataAdapter(command);
                 DataTable dtbl = new DataTable();
                 sqlDA.Fill(dtbl);
                 txtArticulo.DataPropertyName = "articulo";
@@ -77,7 +87,7 @@ namespace TPV
             {
                 while (reader.Read())
                 {
-                    articulos = new Articulos(reader["articulos"].ToString(), reader.GetDouble("precio"), reader.GetInt32("cantidad"), reader.GetDouble("impuesto"), reader["tipo"].ToString());
+                    articulos = new Articulos(reader["articulo"].ToString(), Double.Parse(reader["precio"].ToString()), Convert.ToInt32(reader["cantidad"].ToString()), Double.Parse(reader["impuestos"].ToString()), reader["tipo"].ToString());
                     if (articulos.getArticulo() == art.Trim())
                     {
                         return true;
@@ -88,7 +98,7 @@ namespace TPV
         }
         public bool matchOptionType(String tipo)
         {
-            switch (tipo)
+            switch (tipo.ToLower().Trim())
             {
                 case "cafes":
                     return false;
@@ -136,7 +146,7 @@ namespace TPV
             {
                 try
                 {
-                    cantidad = Convert.ToInt32(Interaction.InputBox("Introduce el impuesto para el articulo: ", "Crear nuevo articulo"));
+                    cantidad = Convert.ToInt32(Interaction.InputBox("Introduce el stock para el articulo: ", "Crear nuevo articulo"));
                     if (cantidad > 0)
                     {
                         seguir = false;
@@ -172,12 +182,13 @@ namespace TPV
                 using var connection = new MySqlConnection(builder.ConnectionString);
                 connection.Open();
                 using var command = connection.CreateCommand();
-                command.CommandText = $"INSERT INTO articulos VALUES (?articulo,?precio,?cant,?impu,?tipo)";
+                command.CommandText = $"INSERT INTO  articulos (`articulo`, `precio`, `cantidad`, `impuestos`, `tipo`) VALUES (?articulo,?precio,?cant,?impu,?tipo)";
                 command.Parameters.Add("?articulo", MySqlDbType.VarString).Value = articulo.Trim();
                 command.Parameters.Add("?precio", MySqlDbType.Double).Value = precio;
                 command.Parameters.Add("?cant", MySqlDbType.Int32).Value = cantidad;
                 command.Parameters.Add("?impu", MySqlDbType.Double).Value = impuesto;
-                command.Parameters.Add("?tipo", MySqlDbType.VarString).Value = tipo;
+                
+                command.Parameters.Add("?tipo", MySqlDbType.VarString).Value = (CultureInfo.InvariantCulture.TextInfo.ToTitleCase(tipo)).ToString();
                 command.ExecuteNonQuery();
                 connectToDB();
             }
@@ -198,11 +209,28 @@ namespace TPV
                 using var connection = new MySqlConnection(builder.ConnectionString);
                 connection.Open();
                 using var command = connection.CreateCommand();
-                command.CommandText = $"DELETE FROM articulos WHERE ariculo=?art ";
+                command.CommandText = $"DELETE FROM articulos WHERE articulo=?art ";
                 command.Parameters.Add("?art", MySqlDbType.VarString).Value = dgvRow.Cells["txtarticulo"].Value.ToString();
                 command.ExecuteNonQuery();
                 dgvArticulos.Rows.RemoveAt(dgvRow.Index);
             }
+        }
+        private void manageArticulos(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvArticulos.CurrentRow != null)
+            {
+                DataGridViewRow dgvRow = dgvArticulos.CurrentRow;
+                using var connection = new MySqlConnection(builder.ConnectionString);
+                connection.Open();
+                using var command = connection.CreateCommand();
+                command.CommandText = $"UPDATE articulos SET precio=?pre ,cantidad=?cant,impuestos=?impu WHERE id=?id";
+                command.Parameters.Add("?pre", MySqlDbType.Double).Value = Double.Parse(dgvRow.Cells["dblprecio"].Value.ToString());
+                command.Parameters.Add("?cant", MySqlDbType.Int32).Value = Convert.ToInt32(dgvRow.Cells["intCantidad"].Value);
+                command.Parameters.Add("?impu", MySqlDbType.Double).Value = Double.Parse(dgvRow.Cells["dblImpuesto"].Value.ToString());
+                command.Parameters.Add("?id", MySqlDbType.Bool).Value = Convert.ToInt32(dgvRow.Cells["intId"].Value);
+                command.ExecuteNonQuery();
+            }
+
         }
         private void hacerFiltro(object sender, EventArgs e)
         {

@@ -2,16 +2,24 @@ using Microsoft.VisualBasic;
 using MySqlConnector;
 using System.Drawing.Printing;
 using TPV.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace TPV
 {
     public partial class Form1 : Form
     {
-        Articulos articuloCuentaSelec;
-        Boolean admin = false;
+
         List<String> lTipoArticulos;
         public static bool userOpenWindow=false;
         Cuenta cuenta = new Cuenta();
+        MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder
+        {
+            Server = "127.0.0.1",
+            Port = 3333,
+            UserID = "root",
+            Password = "a",
+            Database = "tpv",
+        };
         public Form1()
         {
             InitializeComponent();
@@ -19,7 +27,8 @@ namespace TPV
             if (!Usuarios.admin)
             {
                 btnManageUsers.Enabled = false;
-                admin = true;
+                btnEditProductos.Enabled = false;              
+               
             }
             lTipoArticulos= getTipoArticulos();
             colocarTipoArticulos();
@@ -67,16 +76,13 @@ namespace TPV
 
             
         }
+        private void addNewArticulo(object sender, PaintEventArgs e)
+        {
+
+        }
+        
         public List<Articulos> getArticulos( String tipo)
         {
-            var builder = new MySqlConnectionStringBuilder
-            {
-                Server = "127.0.0.1",
-                Port = 3333,
-                UserID = "root",
-                Password = "a",
-                Database = "tpv",
-            };
             using var connection = new MySqlConnection(builder.ConnectionString);
             connection.Open();
             using var command = connection.CreateCommand();
@@ -96,14 +102,6 @@ namespace TPV
         }
         public List<String> getTipoArticulos()
         {
-            var builder = new MySqlConnectionStringBuilder
-            {
-                Server = "127.0.0.1",
-                Port = 3333,
-                UserID = "root",
-                Password = "a",
-                Database = "tpv",
-            };
             using var connection = new MySqlConnection(builder.ConnectionString);
             connection.Open();
             using var command = connection.CreateCommand();
@@ -151,7 +149,7 @@ namespace TPV
                     125, 125);
                 btn.Size = size;
                 btn.BackgroundImageLayout = ImageLayout.Stretch;
-                articuloCuentaSelec = a;
+                
                 btn.Click += new EventHandler(addCuentaEvent);
                 fbProductos.Controls.Add(btn);
             });
@@ -181,18 +179,58 @@ namespace TPV
 
         void addCuentaEvent(Object sender, EventArgs e)
         {
+            Button btn= sender as Button;
+            String articulo =btn.Text;
+            using var connection = new MySqlConnection(builder.ConnectionString);
+            connection.Open();
+            using var command = connection.CreateCommand();
+            command.CommandText = $"SELECT * FROM articulos WHERE articulo=?art";
+            command.Parameters.Add("?art", MySqlDbType.VarString).Value = articulo;
+            Articulos articuloCuentaSelec=null;
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    articuloCuentaSelec = new Articulos(reader["articulo"].ToString(), Double.Parse(reader["precio"].ToString()), Convert.ToInt32(reader["cantidad"].ToString()), Double.Parse(reader["impuestos"].ToString()), reader["tipo"].ToString()); ;
+                }
+            }
             añadirACuenta(articuloCuentaSelec);
         }
 
         private void añadirACuenta(Articulos a)
         {
-            cuenta.addArticulo(a);
-            dgvCuenta.Rows.Clear();
-            cuenta.getCuenta().ForEach((art) =>
+            if (a.getCantidad()>0)
             {
-                double importe = ((art.getCantidad() * art.getPrecio()) + ((art.getCantidad() * art.getPrecio()) * (art.getImpuestos()/100)));
-                dgvCuenta.Rows.Add(art.getArticulo(), art.getPrecio(), art.getCantidad(),art.getImpuestos(),importe);
-            });
+                cuenta.addArticulo(a);
+                dgvCuenta.Rows.Clear();
+                cuenta.getCuenta().ForEach((art) =>
+                {
+                    double importe = ((art.getCantidad() * art.getPrecio()) + ((art.getCantidad() * art.getPrecio()) * (art.getImpuestos() / 100)));
+                    dgvCuenta.Rows.Add(art.getArticulo(), art.getPrecio(), art.getCantidad(), art.getImpuestos(), importe);
+                    Double impuTot = Double.Parse(impuestoCalcTotal.Text);
+                    Double subtotal = cuenta.getTotalCuenta();
+                    if (impuTot <= 0)
+                    {
+                        SubtotalCalTotal.Text = subtotal.ToString();
+                        TotalCalTotal.Text = subtotal.ToString();
+                    }
+                    else
+                    {
+                        SubtotalCalTotal.Text = subtotal.ToString();
+                        TotalCalTotal.Text = (subtotal + (subtotal * (impuTot / 100))).ToString();
+                    }
+                });                
+            }
+            else
+            {
+                string msg = "No quedan mas "+a.getArticulo()+". Reponer!!!";
+                string cap = "Falta de stock";
+                MessageBoxButtons btn = MessageBoxButtons.OK;
+                DialogResult res;
+                res = MessageBox.Show(msg, cap, btn);
+            }
+
+            
 
         }
 
@@ -220,6 +258,21 @@ namespace TPV
             String ticketCuenta = cuenta.devolverTicket();
             e.Graphics.DrawString
               (ticketCuenta, fnt, System.Drawing.Brushes.Black, 0, 0);
+        }
+
+        private void btnEditProductos_Click(object sender, EventArgs e)
+        {
+            if (!userOpenWindow)
+            {
+                userOpenWindow = true;
+                Form form = new ManageArticulos();
+                form.Show();
+            }
+        }
+
+        private void actionPagar(object sender, EventArgs e)
+        {
+
         }
     }
 }
