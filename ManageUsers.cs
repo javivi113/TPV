@@ -56,8 +56,17 @@ namespace TPV
         {
             if(dgvUsers.CurrentRow!= null)
             {
-                dgvUsers.Rows.Clear();
-                dgvUsers.Refresh();
+                try
+                {
+                    dgvUsers.Rows.Clear();
+                    dgvUsers.Refresh();
+                }
+                catch (Exception)
+                {
+
+                }
+                
+                
                 DataGridViewRow dgvRow = dgvUsers.CurrentRow;
                 using var connection = new MySqlConnection(builder.ConnectionString);
                 connection.Open();

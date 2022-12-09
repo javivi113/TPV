@@ -8,7 +8,7 @@ namespace TPV
 {
     public partial class Form1 : Form
     {
-
+        bool admin = true;
         List<String> lTipoArticulos;
         public static bool userOpenWindow=false;
         Cuenta cuenta = new Cuenta();
@@ -27,9 +27,13 @@ namespace TPV
             if (!Usuarios.admin)
             {
                 btnManageUsers.Enabled = false;
-                btnEditProductos.Enabled = false;              
+                btnEditProductos.Enabled = false;
+                btnpagar.Enabled = true;
+                admin= false;
+                
                
             }
+            
             lTipoArticulos= getTipoArticulos();
             colocarTipoArticulos();
             
@@ -68,6 +72,7 @@ namespace TPV
                 Size size = new Size(
                     110,110);
                 btn.Size= size;
+                
                 btn.BackgroundImageLayout = ImageLayout.Stretch;
                 btn.Click += new EventHandler(listarProductosTipo);
                 flowLayoutPanelTipos.Controls.Add(btn);
@@ -149,7 +154,10 @@ namespace TPV
                     125, 125);
                 btn.Size = size;
                 btn.BackgroundImageLayout = ImageLayout.Stretch;
-                
+                if (admin)
+                {
+                    btn.Enabled= false;
+                }
                 btn.Click += new EventHandler(addCuentaEvent);
                 fbProductos.Controls.Add(btn);
             });
@@ -170,12 +178,10 @@ namespace TPV
         private void nuevaCuenta(object sender, EventArgs e)
         {
             cuenta.nuevaCuenta();
+            dgvCuenta.Rows.Clear();
         }
 
-        private void vaciarCuenta(object sender, EventArgs e)
-        {
-            cuenta.nuevaCuenta();
-        }
+        
 
         void addCuentaEvent(Object sender, EventArgs e)
         {
@@ -207,19 +213,21 @@ namespace TPV
                 {
                     double importe = ((art.getCantidad() * art.getPrecio()) + ((art.getCantidad() * art.getPrecio()) * (art.getImpuestos() / 100)));
                     dgvCuenta.Rows.Add(art.getArticulo(), art.getPrecio(), art.getCantidad(), art.getImpuestos(), importe);
-                    Double impuTot = Double.Parse(impuestoCalcTotal.Text);
-                    Double subtotal = cuenta.getTotalCuenta();
-                    if (impuTot <= 0)
-                    {
-                        SubtotalCalTotal.Text = subtotal.ToString();
-                        TotalCalTotal.Text = subtotal.ToString();
-                    }
-                    else
-                    {
-                        SubtotalCalTotal.Text = subtotal.ToString();
-                        TotalCalTotal.Text = (subtotal + (subtotal * (impuTot / 100))).ToString();
-                    }
-                });                
+                    
+                });
+                Double impuTot = Double.Parse(impuestoCalcTotal.Text);
+                Double subtotal = cuenta.getTotalCuenta();
+                if (impuTot <= 0)
+                {
+                    lblSubtotal.Text = subtotal.ToString()+"€";
+                    TotalCalTotal.Text = subtotal.ToString()+"€";
+                }
+                else
+                {
+                    lblSubtotal.Text = subtotal.ToString() + "€";
+                    TotalCalTotal.Text = (subtotal + (subtotal * (impuTot / 100))).ToString() + "€";
+                }
+                
             }
             else
             {
@@ -234,8 +242,14 @@ namespace TPV
 
         }
 
-        private void sacarTicket(object sender, EventArgs e)
+        private void sacarTicket()
         {
+            List<Articulos> cuentaFinal = cuenta.getCuenta();
+            cuentaFinal.ForEach(a =>
+            {
+                cuenta.actualizarCantidadProductoDB(a);
+            });
+
             string directory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string file = "ticket.pdf";
 
@@ -249,15 +263,22 @@ namespace TPV
                 }
             };
 
+            
             pDoc.PrintPage += new PrintPageEventHandler(Print_Page);
             pDoc.Print();
+            cuenta.nuevaCuenta();
+            dgvCuenta.Rows.Clear();
+            lblSubtotal.Text = "0";
+            TotalCalTotal.Text = "0";
+            
         }
+
+
         public void Print_Page(object sender, PrintPageEventArgs e)
         {
             Font fnt = new Font("Courier New", 12);
             String ticketCuenta = cuenta.devolverTicket();
-            e.Graphics.DrawString
-              (ticketCuenta, fnt, System.Drawing.Brushes.Black, 0, 0);
+            e.Graphics.DrawString(ticketCuenta, fnt, System.Drawing.Brushes.Black, 0, 0);
         }
 
         private void btnEditProductos_Click(object sender, EventArgs e)
@@ -270,9 +291,16 @@ namespace TPV
             }
         }
 
-        private void actionPagar(object sender, EventArgs e)
+        private void pagar(object sender, EventArgs e)
         {
+            sacarTicket();
+        }
 
+        private void cerrarSesion(object sender, EventArgs e)
+        {
+            this.Close();
+            Form form = new Login();
+            form.Show();
         }
     }
 }

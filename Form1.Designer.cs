@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.TotalCalTotal = new System.Windows.Forms.Label();
+            this.lblSubtotal = new System.Windows.Forms.Label();
             this.btnEditProductos = new System.Windows.Forms.Button();
             this.dgvCuenta = new System.Windows.Forms.DataGridView();
             this.txtColArticulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,8 +51,6 @@
             this.impuestoCalcTotal = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.TotalCalTotal = new System.Windows.Forms.TextBox();
-            this.SubtotalCalTotal = new System.Windows.Forms.TextBox();
             this.btnpagar = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -78,7 +78,6 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.btnManageUsers = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -108,6 +107,8 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.TotalCalTotal);
+            this.splitContainer2.Panel2.Controls.Add(this.lblSubtotal);
             this.splitContainer2.Panel2.Controls.Add(this.btnEditProductos);
             this.splitContainer2.Panel2.Controls.Add(this.dgvCuenta);
             this.splitContainer2.Panel2.Controls.Add(this.flowLayoutPanelTipos);
@@ -120,8 +121,6 @@
             this.splitContainer2.Panel2.Controls.Add(this.impuestoCalcTotal);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
             this.splitContainer2.Panel2.Controls.Add(this.label1);
-            this.splitContainer2.Panel2.Controls.Add(this.TotalCalTotal);
-            this.splitContainer2.Panel2.Controls.Add(this.SubtotalCalTotal);
             this.splitContainer2.Panel2.Controls.Add(this.btnpagar);
             this.splitContainer2.Panel2.Controls.Add(this.button29);
             this.splitContainer2.Panel2.Controls.Add(this.textBox3);
@@ -149,15 +148,36 @@
             this.splitContainer2.Panel2.Controls.Add(this.button13);
             this.splitContainer2.Panel2.Controls.Add(this.button7);
             this.splitContainer2.Panel2.Controls.Add(this.button6);
-            this.splitContainer2.Panel2.Controls.Add(this.button5);
             this.splitContainer2.Panel2.Controls.Add(this.button4);
             this.splitContainer2.Panel2.Controls.Add(this.btnManageUsers);
             this.splitContainer2.Panel2.Controls.Add(this.button1);
-            this.splitContainer2.Panel2.Enabled = false;
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel2_Paint);
             this.splitContainer2.Size = new System.Drawing.Size(1904, 1041);
             this.splitContainer2.SplitterDistance = 157;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // TotalCalTotal
+            // 
+            this.TotalCalTotal.AutoSize = true;
+            this.TotalCalTotal.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.TotalCalTotal.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.TotalCalTotal.Location = new System.Drawing.Point(1295, 605);
+            this.TotalCalTotal.Name = "TotalCalTotal";
+            this.TotalCalTotal.Size = new System.Drawing.Size(28, 32);
+            this.TotalCalTotal.TabIndex = 59;
+            this.TotalCalTotal.Text = "0";
+            this.TotalCalTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblSubtotal
+            // 
+            this.lblSubtotal.AutoSize = true;
+            this.lblSubtotal.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblSubtotal.Location = new System.Drawing.Point(1300, 552);
+            this.lblSubtotal.Name = "lblSubtotal";
+            this.lblSubtotal.Size = new System.Drawing.Size(100, 25);
+            this.lblSubtotal.TabIndex = 58;
+            this.lblSubtotal.Text = "bfwbefvw";
+            this.lblSubtotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnEditProductos
             // 
@@ -189,8 +209,8 @@
             // txtColArticulo
             // 
             this.txtColArticulo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.txtColArticulo.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.txtColArticulo.DefaultCellStyle = dataGridViewCellStyle1;
             this.txtColArticulo.HeaderText = "Articulo";
             this.txtColArticulo.Name = "txtColArticulo";
             // 
@@ -311,28 +331,11 @@
             this.label1.TabIndex = 42;
             this.label1.Text = "Subtotal";
             // 
-            // TotalCalTotal
-            // 
-            this.TotalCalTotal.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TotalCalTotal.Location = new System.Drawing.Point(1167, 608);
-            this.TotalCalTotal.Name = "TotalCalTotal";
-            this.TotalCalTotal.Size = new System.Drawing.Size(156, 33);
-            this.TotalCalTotal.TabIndex = 41;
-            this.TotalCalTotal.Text = "0";
-            // 
-            // SubtotalCalTotal
-            // 
-            this.SubtotalCalTotal.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.SubtotalCalTotal.Location = new System.Drawing.Point(1167, 549);
-            this.SubtotalCalTotal.Name = "SubtotalCalTotal";
-            this.SubtotalCalTotal.Size = new System.Drawing.Size(156, 33);
-            this.SubtotalCalTotal.TabIndex = 40;
-            this.SubtotalCalTotal.Text = "0";
-            // 
             // btnpagar
             // 
             this.btnpagar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnpagar.BackgroundImage")));
             this.btnpagar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnpagar.Enabled = false;
             this.btnpagar.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnpagar.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnpagar.Location = new System.Drawing.Point(1572, 12);
@@ -341,7 +344,7 @@
             this.btnpagar.TabIndex = 38;
             this.btnpagar.Text = "Pagar";
             this.btnpagar.UseVisualStyleBackColor = true;
-            this.btnpagar.Click += new System.EventHandler(this.actionPagar);
+            this.btnpagar.Click += new System.EventHandler(this.pagar);
             // 
             // button29
             // 
@@ -608,34 +611,25 @@
             // 
             // button6
             // 
-            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button6.Location = new System.Drawing.Point(678, 16);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(94, 63);
             this.button6.TabIndex = 7;
+            this.button6.Text = "Cerrar Sesión";
             this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(538, 16);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(94, 63);
-            this.button5.TabIndex = 6;
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.vaciarCuenta);
+            this.button6.Click += new System.EventHandler(this.cerrarSesion);
             // 
             // button4
             // 
             this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
             this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button4.Location = new System.Drawing.Point(407, 16);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(94, 63);
+            this.button4.Size = new System.Drawing.Size(226, 63);
             this.button4.TabIndex = 5;
+            this.button4.Text = "Nueva cuenta";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.nuevaCuenta);
             // 
@@ -712,7 +706,6 @@
         private Button button13;
         private Button button7;
         private Button button6;
-        private Button button5;
         private Button button4;
         private Button btnManageUsers;
         private TextBox textBox1;
@@ -721,8 +714,6 @@
         private TextBox impuestoCalcTotal;
         private Label label2;
         private Label label1;
-        private TextBox TotalCalTotal;
-        private TextBox SubtotalCalTotal;
         private Label user;
         private PictureBox pictureBox1;
         private Label usuario;
@@ -735,5 +726,7 @@
         private DataGridViewTextBoxColumn intColImpuestos;
         private DataGridViewTextBoxColumn doubleColImporte;
         private Button btnEditProductos;
+        private Label TotalCalTotal;
+        private Label lblSubtotal;
     }
 }
